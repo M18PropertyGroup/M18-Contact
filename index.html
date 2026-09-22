@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Let's Chat</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
@@ -23,7 +28,11 @@
     padding-block:48px;
     display:flex;
     justify-content:center;
+    align-items:flex-start;
+    min-height:0;
   }
+
+  html{ height:auto; }
 
   .card{
     width:100%;
@@ -236,8 +245,10 @@
 
   [hidden]{ display:none !important; }
 </style>
+</head>
+<body>
 
-<div class="card">
+<div class="card" id="top">
   <div class="inner">
     <img class="logo" src="logo.png" alt="M18 Property Group">
 
@@ -306,6 +317,10 @@
 <iframe name="hidden_iframe" style="display:none;" title="" aria-hidden="true"></iframe>
 
 <script>
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  window.scrollTo(0, 0);
+  window.addEventListener('load', function(){ window.scrollTo(0, 0); });
+
   (function(){
     var form = document.getElementById('contact-form');
     var confirmPanel = document.getElementById('confirm');
@@ -340,3 +355,5 @@
     });
   })();
 </script>
+</body>
+</html>
