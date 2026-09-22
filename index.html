@@ -1,0 +1,342 @@
+<title>Let's Chat</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-page:#EAE4D4;
+    --bg-card:#F5F1E8;
+    --ink:#1A1A1A;
+    --muted:#5C5850;
+    --muted-2:#8A8066;
+    --line:#C9C2B2;
+    --line-soft:#DDD6C4;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    background:var(--bg-page);
+    color:var(--ink);
+    font-family:Georgia,'Times New Roman',serif;
+    padding-inline:16px;
+    padding-block:48px;
+    display:flex;
+    justify-content:center;
+  }
+
+  .card{
+    width:100%;
+    max-width:560px;
+    background:var(--bg-card);
+    border:1px solid var(--line-soft);
+  }
+
+  .inner{
+    padding:52px 44px 40px 44px;
+  }
+
+  @media (max-width:480px){
+    .inner{ padding:40px 26px 32px 26px; }
+  }
+
+  .logo{
+    display:block;
+    width:260px;
+    height:auto;
+    margin:0 auto 48px auto;
+  }
+
+  .name-row{
+    display:flex;
+    gap:20px;
+  }
+
+  .name-row .field{ flex:1; min-width:0; }
+
+  @media (max-width:420px){
+    .name-row{ flex-direction:column; gap:26px; }
+  }
+
+  form{
+    display:flex;
+    flex-direction:column;
+    gap:26px;
+  }
+
+  .field{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .field label{
+    font-size:10.5px;
+    letter-spacing:1.8px;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  .field input,
+  .field textarea{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:16px;
+    color:var(--ink);
+    background:transparent;
+    border:none;
+    border-bottom:1px solid var(--line);
+    padding:8px 2px 10px 2px;
+    outline:none;
+    resize:vertical;
+  }
+
+  .field textarea{
+    min-height:90px;
+    line-height:1.5;
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder{ color:#b3ac97; }
+
+  .field input:focus,
+  .field textarea:focus{
+    border-bottom-color:var(--ink);
+  }
+
+  .field input:focus-visible,
+  .field textarea:focus-visible{
+    outline:2px solid var(--ink);
+    outline-offset:4px;
+  }
+
+  .field input.touched:invalid{
+    border-bottom-color:#a13a2f;
+  }
+
+  button.submit{
+    margin-top:6px;
+    background:var(--ink);
+    color:#ffffff;
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    border:none;
+    padding:17px 20px;
+    cursor:pointer;
+    width:100%;
+  }
+
+  button.submit:hover{ opacity:0.85; }
+  button.submit:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
+
+  @media (prefers-reduced-motion:no-preference){
+    button.submit{ transition:opacity .15s ease; }
+    .field input{ transition:border-color .15s ease; }
+    #confirm{ animation:rise .5s ease; }
+  }
+
+  @keyframes rise{
+    from{ opacity:0; transform:translateY(8px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  #confirm{
+    text-align:center;
+    padding:20px 0 4px 0;
+  }
+
+  #confirm .mark{
+    width:44px;
+    height:44px;
+    border:1px solid var(--ink);
+    border-radius:50%;
+    margin:0 auto 22px auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+  }
+
+  #confirm h2{
+    font-family:'Playfair Display',Georgia,serif;
+    font-weight:600;
+    font-size:26px;
+    margin:0 0 12px 0;
+  }
+
+  #confirm p{
+    font-size:14px;
+    line-height:1.7;
+    color:var(--muted);
+    max-width:360px;
+    margin:0 auto;
+  }
+
+  .team{
+    margin-top:38px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+
+  .team-label{
+    font-size:10.5px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--muted);
+    text-align:center;
+    margin-bottom:4px;
+  }
+
+  .agent{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:12px;
+    font-size:13px;
+    flex-wrap:wrap;
+  }
+
+  .agent .name{
+    font-weight:bold;
+    color:var(--ink);
+  }
+
+  .agent .role{
+    display:block;
+    font-size:10px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--muted-2);
+    margin-top:2px;
+  }
+
+  .agent .contact{
+    color:var(--muted);
+    text-align:right;
+  }
+
+  .agent .contact a{
+    color:var(--muted);
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+  }
+
+  .agent .contact a:hover{ color:var(--ink); border-bottom-color:var(--ink); }
+
+  footer{
+    text-align:center;
+    font-size:10px;
+    color:var(--muted-2);
+    margin-top:40px;
+    letter-spacing:0.3px;
+  }
+
+  [hidden]{ display:none !important; }
+</style>
+
+<div class="card">
+  <div class="inner">
+    <img class="logo" src="logo.png" alt="M18 Property Group">
+
+    <form id="contact-form" action="https://formspree.io/f/xoevdzrb" method="POST" target="hidden_iframe" novalidate>
+      <input type="hidden" name="_subject" value="New message from the M18 website">
+      <div class="name-row">
+        <div class="field">
+          <label for="first-name">First Name</label>
+          <input id="first-name" name="First Name" type="text" autocomplete="given-name" required>
+        </div>
+        <div class="field">
+          <label for="last-name">Last Name</label>
+          <input id="last-name" name="Last Name" type="text" autocomplete="family-name" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="phone">Phone Number</label>
+        <input id="phone" name="Phone Number" type="tel" autocomplete="tel" required>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="Message" rows="4"></textarea>
+      </div>
+      <button class="submit" type="submit">Let&rsquo;s Chat!</button>
+      <p id="form-error" hidden style="font-size:12.5px;color:#a13a2f;text-align:center;margin:2px 0 0 0;">Something went wrong sending your message. Please try again, or reach out directly below.</p>
+    </form>
+
+    <div id="confirm" hidden>
+      <div class="mark">&#10003;</div>
+      <h2>Thank you.</h2>
+      <p>We&rsquo;ve received your details and someone from the M18 team will be in touch shortly.</p>
+    </div>
+
+    <div class="team">
+      <div class="team-label">Prefer to reach out directly?</div>
+      <div class="agent">
+        <div>
+          <span class="name">Alan Roy Miculitzki</span>
+          <span class="role">Broker</span>
+        </div>
+        <div class="contact">
+          (305) 915-1145<br>
+          <a href="mailto:alan@m18property.com">alan@m18property.com</a>
+        </div>
+      </div>
+      <div class="agent">
+        <div>
+          <span class="name">Keren Vainstein</span>
+          <span class="role">Sales Associate</span>
+        </div>
+        <div class="contact">
+          (786) 300-9044<br>
+          <a href="mailto:keren@m18property.com">keren@m18property.com</a>
+        </div>
+      </div>
+    </div>
+
+    <footer>&copy; 2026 M18 Property Group. All rights reserved.</footer>
+  </div>
+</div>
+
+<iframe name="hidden_iframe" style="display:none;" title="" aria-hidden="true"></iframe>
+
+<script>
+  (function(){
+    var form = document.getElementById('contact-form');
+    var confirmPanel = document.getElementById('confirm');
+    var errorMsg = document.getElementById('form-error');
+    var submitBtn = form.querySelector('button.submit');
+    var inputs = form.querySelectorAll('input');
+
+    inputs.forEach(function(input){
+      input.addEventListener('blur', function(){ input.classList.add('touched'); });
+    });
+
+    form.addEventListener('submit', function(e){
+      if (!form.checkValidity()){
+        e.preventDefault();
+        inputs.forEach(function(input){ input.classList.add('touched'); });
+        form.reportValidity();
+        return;
+      }
+
+      // Valid: let the browser do a real, native form submission into the
+      // hidden iframe (not a fetch/AJAX call). This is the most broadly
+      // compatible way to submit to Formspree — it works even in hosting
+      // environments that block background network requests from JS.
+      errorMsg.hidden = true;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      window.setTimeout(function(){
+        form.hidden = true;
+        confirmPanel.hidden = false;
+      }, 900);
+    });
+  })();
+</script>
